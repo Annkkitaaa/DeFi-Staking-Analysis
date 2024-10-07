@@ -8,6 +8,15 @@ This repository contains the code for a **DeFi Staking Analysis Dashboard** buil
 You can view the live demo of the dashboard here:
 [DeFi Staking Analysis Dashboard](https://annkkitaaa-defi-staking-analysis-defi-analysis-ualsu0.streamlit.app/)
 
+![image](https://github.com/user-attachments/assets/b37f6123-19a6-45a8-ab08-3c3a3968ba79)
+
+![image](https://github.com/user-attachments/assets/772b923d-c394-499c-98ab-fac31636724b)
+
+![image](https://github.com/user-attachments/assets/36e409c8-8dab-47d5-86b0-1c017e9a29a1)
+
+
+
+
 ## Features
 - **Data Fetching:** Real-time historical cryptocurrency data from Yahoo Finance (ETH, SOL, and MATIC).
 - **Returns Calculation:** Computes daily percentage returns for each cryptocurrency.
