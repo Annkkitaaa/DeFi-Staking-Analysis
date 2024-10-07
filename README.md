@@ -27,7 +27,7 @@ You can view the live demo of the dashboard here:
 
 ### 1. Clone the Repository
 ```
-git clone https://github.com/yourusername/defi-staking-analysis.git
+git clone https://github.com/Annkkitaaa/defi-staking-analysis.git
 cd defi-staking-analysis
 ```
 
