@@ -9,8 +9,13 @@ import streamlit as st
 
 # Data Collection and Preprocessing
 def fetch_crypto_data(crypto, start_date, end_date):
-    data = yf.download(crypto, start=start_date, end=end_date)
-    return data['Close']
+    try:
+        ticker = yf.Ticker(crypto)
+        data = ticker.history(start=start_date, end=end_date)
+        return data['Close']
+    except Exception as e:
+        st.error(f"Error fetching data for {crypto}: {str(e)}")
+        return pd.Series()
 
 def preprocess_data(eth_data, sol_data, matic_data):
     df = pd.DataFrame({
@@ -78,6 +83,11 @@ def run_analysis():
     sol_data = fetch_crypto_data('SOL-USD', start_date, end_date)
     matic_data = fetch_crypto_data('MATIC-USD', start_date, end_date)
 
+    # Check if data is empty
+    if eth_data.empty or sol_data.empty or matic_data.empty:
+        st.error("Failed to fetch data for one or more cryptocurrencies.")
+        return None, None, None, None, None
+
     # Preprocess data
     df = preprocess_data(eth_data, sol_data, matic_data)
     df = calculate_returns(df)
@@ -98,7 +108,12 @@ def run_analysis():
 def run_dashboard():
     st.title('DeFi Staking Analysis Dashboard')
 
-    df, correlation, eth_model, sol_model, matic_model = run_analysis()
+    result = run_analysis()
+    if result[0] is None:
+        st.error("Analysis failed due to data fetching issues.")
+        return
+
+    df, correlation, eth_model, sol_model, matic_model = result
 
     st.header('Price Trends')
     st.pyplot(plot_price_trends(df))
